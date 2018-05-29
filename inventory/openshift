@@ -1,8 +1,6 @@
 [all:vars]
-ansible_ssh_user=root
-#ansible_become=True
-#os_firewall_use_firewalld=True
-#ansible_become_method=sudo
+ansible_ssh_user=ansible
+ansible_become=yes
 
 [OSEv3:children]
 masters
@@ -12,16 +10,14 @@ glusterfs
 
 
 [OSEv3:vars]
-openshift_release=v3.9
+openshift_release=v3.7
 deployment_type=origin
 openshift_master_default_subdomain=app.lab.unixcraft.lcl
 osm_default_node_selector='region=lab'
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
-openshift_master_htpasswd_users={'kashif': '$apr1$hemDZz0y$jZWQSj8AR9YRkomgdPzdX.', 'test': '$apr1$EWWNA0RQ$39v.Jlz/53lT6qPAZN3XV1'}
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
 openshift_disable_check=memory_availability,disk_availability
 
-openshift_install_examples=False
 
 # enable ntp on masters to ensure proper failover
 openshift_clock_enabled=true
